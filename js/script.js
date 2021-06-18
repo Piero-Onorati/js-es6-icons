@@ -1,4 +1,4 @@
-/* MILESTONE 1 */
+/* MILESTONE 1 : Partendo dalla seguente struttura dati , mostriamo in pagina tutte le icone disponibili come da layout.*/
 
 const icons = [
     {
@@ -102,7 +102,7 @@ const icons = [
 
 // print(icons);
 
-/* MILESTONE 2 */
+/* MILESTONE 2 : Coloriamo le icone per tipo */
 // Creaiamo un nuovo array uguale ad ICONS ma a cui vado ad aggiungere la KEY COLOR
 // N.B. Alla funzione in basso abbiamo aggiunto color nel destructuring e style="color:${color} all'icon
 
@@ -123,14 +123,53 @@ const coloredIcons = icons.map((element) => {
 
 print(coloredIcons);
 
-/* MILESTONE 3 */
+/* MILESTONE 3 : Creiamo una select con i tipi di icone e usiamola per filtrare le icone */
+
+// Inserire nella SELECT dell'HTML 3 option: animal, vegetable e user : creo un array= type. 
+// In esso inserisco le 3 option, quindi le stampo nell'HTML
+
+const type = [];
+
+coloredIcons.forEach((element)=>{
+    if (!type.includes(element.type)) {
+        type.push(element.type);
+
+        // stampo nell'HTML le option nella select
+        document.getElementById('type').innerHTML += 
+        `<option value="${element.type}">${element.type}</option>`
+    }
+    
+});
 
 
+const select = document.getElementById('type');
 
+select.addEventListener('change', function(){
+    const valueOfSelect = select.value;
+
+    const filteredIcons = coloredIcons.filter((element) => {
+        return element.type == valueOfSelect
+    });
+    
+    print(filteredIcons);
+
+    if (valueOfSelect == 'All') {
+        print(coloredIcons)
+    }
+
+});
+
+
+// ------------------------------------------------------------------------------ //
+
+/* FUNCTION */
 
 function print(array){
-    array.forEach((element) => {
 
+    document.getElementById('main').innerHTML ='';
+
+
+    array.forEach((element) => {
         const{name, prefix, family, color} = element;
         document.getElementById('main').innerHTML +=
         `<div class="card">
