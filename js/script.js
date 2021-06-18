@@ -95,4 +95,15 @@ const icons = [
       type: 'user',
       family: 'fas',
     },
-  ];
+];
+
+icons.forEach((element) => {
+
+    const{name, prefix, family} = element;
+    document.getElementById('main').innerHTML +=
+    `<div class="card">
+        <i class=" ${family} ${prefix}${name}"></i>
+        <h4>${name}</h4>
+    </div>
+    `
+});
